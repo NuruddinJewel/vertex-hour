@@ -1,2 +1,17 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@theme {
+  --color-charcoal: #0B0C10;
+  --color-slate: #1F2833;
+  --color-gold: #C5A880;
+  --color-gold-dark: #8C7851;
+  --color-ivory: #E8E6E1;
+
+  --font-display: var(--font-display), serif;
+  --font-body: var(--font-body), sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
