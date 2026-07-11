@@ -8,8 +8,8 @@ export default function Footer() {
             title: "Explore",
             links: [
                 { label: "All Watches", href: "/explore" },
-                { label: "Top Brands", href: "/explore" },
-                { label: "Live Auctions", href: "/explore" },
+                { label: "Top Brands", href: "/explore?sort=brand" },
+                { label: "Live Auctions", href: "/explore?filter=auction" },
             ],
         },
         {
