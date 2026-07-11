@@ -8,8 +8,8 @@ export default function Footer() {
             title: "Explore",
             links: [
                 { label: "All Watches", href: "/explore" },
-                { label: "Top Brands", href: "/explore?sort=brand" },
-                { label: "Live Auctions", href: "/explore?filter=auction" },
+                { label: "Top Brands", href: "/explore" },
+                { label: "Live Auctions", href: "/explore" },
             ],
         },
         {
@@ -23,7 +23,7 @@ export default function Footer() {
         {
             title: "Support",
             links: [
-                { label: "Authenticity Verification", href: "/faq#authenticity" },
+                { label: "Authenticity Guide", href: "/blog/authenticity-verification-guide" },
                 { label: "Shipping", href: "/faq#shipping" },
                 { label: "Warranty", href: "/faq#warranty" },
             ],
@@ -53,7 +53,7 @@ export default function Footer() {
                             <h4 className="font-display text-gold text-lg mb-4">{col.title}</h4>
                             <ul className="space-y-3">
                                 {col.links.map((link) => (
-                                    <li key={link.href}>
+                                    <li key={link.label}>
                                         <Link
                                             href={link.href}
                                             className="font-body text-sm text-ivory/60 hover:text-gold transition-colors"
