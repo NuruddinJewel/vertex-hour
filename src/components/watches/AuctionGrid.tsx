@@ -4,7 +4,6 @@ import { Flame } from "lucide-react";
 
 export default async function AuctionGrid() {
     const watches = await getAllWatches();
-    // Note: এখনো real bidding/auction system নাই — এখানে সবচেয়ে high-value watches গুলো "Hot" হিসেবে দেখানো হচ্ছে
     const hotWatches = [...watches]
         .sort((a, b) => (b.price || 0) - (a.price || 0))
         .slice(0, 4);

@@ -207,3 +207,15 @@ export async function getUserCount(): Promise<number> {
     const data = await res.json();
     return data.count;
 }
+
+// export async function getOrdersByBuyer(buyerId: string) {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/orders?buyerId=${buyerId}`, { cache: "no-store" });
+//     if (!res.ok) return [];
+//     return res.json();
+// }
+
+export async function getOrdersByBuyer(buyerId: string): Promise<Order[]> {
+    const res = await fetch(`${API_URL}/api/orders?buyerId=${buyerId}`, { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to fetch buyer orders");
+    return res.json();
+}
