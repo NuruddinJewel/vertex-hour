@@ -10,5 +10,5 @@ export function proxy(request: NextRequest) {
 // export default function proxy(request: NextRequest) { ... }
 
 export const config = {
-    matcher: '/about/:path*',
+    matcher: '/old-about/:path*',
 }

@@ -1,10 +1,3 @@
-// import type { NextConfig } from "next";
-
-// const nextConfig: NextConfig = {
-//   /* config options here */
-// };
-
-// export default nextConfig;
 import dns from 'node:dns';
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
