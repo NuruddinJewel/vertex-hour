@@ -136,28 +136,27 @@ import { Users, Watch as WatchIcon, DollarSign, TrendingUp } from "lucide-react"
 import SalesChart from "@/components/watches/SalesChart";
 
 export default async function AdminDashboardPage() {
-    // API থেকে সব প্রয়োজনীয় ডেটা প্যারালালি নিয়ে আসা হলো
     const [watches, orders, userCount] = await Promise.all([
         getAllWatches(),
         getAllOrders(),
         getUserCount(),
     ]);
 
-    // Total Valuation হিসাব করা (সব ঘড়ির বর্তমান স্টক অনুযায়ী দাম)
-    const totalValuation = watches.reduce((sum, w) => {
-        const qty = Number(w.quantity) || 0;
-        const price = Number(w.price) || 0;
-        return sum + (price * qty);
-    }, 0);
+    // Total Valuation 
+    // const totalValuation = watches.reduce((sum, w) => {
+    //     const qty = Number(w.quantity) || 0;
+    //     const price = Number(w.price) || 0;
+    //     return sum + (price * qty);
+    // }, 0);
 
-    // Total Revenue বা সর্বমোট বিক্রি হিসাব করা (orders থেকে)
+    // Total Revenue 
     const totalRevenue = orders.reduce((sum, order) => {
         const qty = Number(order.quantity) || 1;
         const price = Number(order.price) || 0;
         return sum + (price * qty);
     }, 0);
 
-    // মোট কতগুলো ঘড়ি বিক্রি হয়েছে তার সংখ্যা
+    // Total Watch Sold
     const totalWatchesSold = orders.reduce((sum, order) => sum + (Number(order.quantity) || 1), 0);
 
     const stats = [
@@ -178,7 +177,6 @@ export default async function AdminDashboardPage() {
         },
         {
             label: "Registered Users",
-            // Better-Auth এর ইউজার কাউন্ট এখানে বসানো হলো
             value: userCount,
             icon: Users,
         },
@@ -215,7 +213,8 @@ export default async function AdminDashboardPage() {
             </div>
 
             {/* Sales Chart */}
-            <SalesChart watches={watches} />
+            {/* <SalesChart watches={watches} /> */}
+            <SalesChart orders={orders} />
 
             {/* Recent Listings */}
             <div className="bg-slate border border-gold/20 rounded-t-2xl p-6 mt-8">
@@ -285,3 +284,4 @@ export default async function AdminDashboardPage() {
         </div>
     );
 }
+

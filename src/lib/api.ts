@@ -195,25 +195,47 @@ export async function getAllOrders(): Promise<Order[]> {
     return res.json();
 }
 
+//1
+
 // export async function getUserCount(): Promise<number> {
-//     const res = await fetch("/api/users/count", { cache: "no-store" });
+//     const res = await fetch(`${API_URL}/api/users/count`, { cache: "no-store" });
 //     if (!res.ok) return 0;
 //     const data = await res.json();
 //     return data.count;
 // }
+
+//2 {getUserCount}
 export async function getUserCount(): Promise<number> {
-    const res = await fetch(`${API_URL}/api/users/count`, { cache: "no-store" });
-    if (!res.ok) return 0;
-    const data = await res.json();
-    return data.count;
+    try {
+        const baseUrl = process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "http://localhost:3000";
+        const res = await fetch(`${baseUrl}/api/user/count`, {
+            cache: "no-store",
+        });
+
+        if (!res.ok) {
+            console.error("Failed to fetch users. Status:", res.status);
+            return 0;
+        }
+
+        const data = await res.json();
+
+        if (data && typeof data.count === "number") {
+            return data.count;
+        }
+
+        return 0;
+    } catch (error) {
+        console.error("Error in getUserCount:", error);
+        return 0;
+    }
 }
 
-// export async function getOrdersByBuyer(buyerId: string) {
-//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/orders?buyerId=${buyerId}`, { cache: "no-store" });
-//     if (!res.ok) return [];
-//     return res.json();
-// }
 
+
+
+
+
+//Orders
 export async function getOrdersByBuyer(buyerId: string): Promise<Order[]> {
     const res = await fetch(`${API_URL}/api/orders?buyerId=${buyerId}`, { cache: "no-store" });
     if (!res.ok) throw new Error("Failed to fetch buyer orders");
