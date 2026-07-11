@@ -1,14 +1,22 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
 
-// This function can be marked `async` if using `await` inside
 export function proxy(request: NextRequest) {
-    return NextResponse.redirect(new URL('/home', request.url))
-}
+    const sessionCookie = getSessionCookie(request);
 
-// Alternatively, you can use a default export:
-// export default function proxy(request: NextRequest) { ... }
+    const protectedRoutes = ["/items/add", "/items/manage", "/dashboard", "/profile"];
+    const isProtectedRoute = protectedRoutes.some((route) =>
+        request.nextUrl.pathname.startsWith(route)
+    );
+
+    if (isProtectedRoute && !sessionCookie) {
+        return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    return NextResponse.next();
+}
 
 export const config = {
-    matcher: '/old-about/:path*',
-}
+    matcher: ["/items/add", "/items/manage/:path*", "/dashboard/:path*", "/profile"],
+};
