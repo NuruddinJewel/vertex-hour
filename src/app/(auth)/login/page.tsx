@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Watch, Mail, Lock } from "lucide-react";
@@ -13,7 +13,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-    async function handleLogin(e: FormEvent<HTMLFormElement>) {
+    async function handleLogin(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
         setLoading(true);
 

@@ -24,8 +24,8 @@ export default function Footer() {
             title: "Support",
             links: [
                 { label: "Authenticity Guide", href: "/blog/authenticity-verification-guide" },
-                { label: "Shipping", href: "/faq#shipping" },
-                { label: "Warranty", href: "/faq#warranty" },
+                { label: "Shipping", href: "#" },
+                { label: "Warranty", href: "#" },
             ],
         },
     ];
